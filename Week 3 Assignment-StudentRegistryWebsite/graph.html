@@ -1,0 +1,174 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        function generateRGB(length) {
+            let graphColors = [];
+            for (i = 0; i < length; i++) {
+                var randomR = Math.floor((Math.random() * 130) + 100);
+                var randomG = Math.floor((Math.random() * 130) + 100);
+                var randomB = Math.floor((Math.random() * 130) + 100);
+                var graphBackground = "rgb(" + randomR + ", " + randomG + ", " + randomB + ")";
+                graphColors.push(graphBackground);
+            }
+            return graphColors
+        }
+
+
+        function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+
+        function dataPreparator(data) {
+            console.log(data)
+            let result1 = []
+            for (i of data) {
+                if (i.classroom == "10") {
+                    result1.push(i.division)
+                }
+                else if (i.classroom == "11") {
+                    result1.push(i.division)
+                }
+                else if (i.classroom == "12") {
+                    result1.push(i.division)
+                }
+            }
+                    result1 = result1.filter(onlyUnique)
+
+                    console.log('result1',result1)
+
+                    let final1 = []
+                    for (i of result1) {
+                        console.log(i)
+                        val1 = 0
+                        val2=0
+                        val3=0
+                        for (j of data) {
+                            if (i == j.division) {
+                                if(j.classroom == 10){
+                                    val1 = val1 + parseInt(j.attendance);
+                                }
+                                else if(j.classroom == 11){
+                                    val2 = val2 + parseInt(j.attendance);
+                                }
+                                else if(j.classroom == 12){
+                                    val3 = val3 + parseInt(j.attendance);
+                                }
+                            }
+                        }
+                    final1.push([val1,val2,val3])
+                    console.log('final1',final1)
+        }
+        function transposeArray(array, arrayLength){
+    var newArray = [];
+    for(var i = 0; i < array.length; i++){
+        newArray.push([]);
+    };
+
+    for(var i = 0; i < array.length; i++){
+        for(var j = 0; j < arrayLength; j++){
+            newArray[j].push(array[i][j]);
+        };
+    };
+
+    return newArray;
+}
+       final1 = transposeArray(final1,result1.length)
+       console.log(final1)
+        getGraph(result1 ,final1)
+    }
+        function getData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                    dataPreparator(response)
+                }
+            }
+            var url = "http://localhost:8086/getDetails"
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        
+        function getGraph(division , attendance) {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: division,//division array
+                    datasets: [
+                        {
+                            label: '10 Attendance Report',
+                            data: attendance[0],//attendance array
+                            borderColor: '#3e95cd',
+                            backgroundColor: 'tomato',
+                            borderWidth: 1,
+                            //fill: false
+                        },
+                        {
+                            label: '11 Attendance Report',
+                            data: attendance[1],
+                            borderColor: '#8e5ea2',
+                            backgroundColor: 'dogerblue',
+                            borderWidth: 1,
+                            //fill: false
+                        },
+                        {
+                            label: '12 Attendance Report',
+                            data: attendance[2],
+                            borderColor: '#000000',
+                           backgroundColor: 'slateblue',
+                            borderWidth: 1,
+                            //fill: false
+                        }
+
+
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+    .button {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+      }
+      
+      .button:hover {background-color: #3e8e41}
+      
+      .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+    </style>
+</head>
+
+<body onload="getData()">
+    <center>
+    <canvas id="myChart" style="height: 100%; width: 100%;"></canvas>
+    <button class="button" onclick="window.location.href='http://localhost:8086/'">Home</button>
+    </center>
+    
+</body>
+</html>

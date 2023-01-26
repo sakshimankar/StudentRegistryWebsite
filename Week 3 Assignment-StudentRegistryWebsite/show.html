@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showData(){
+            var xhttp = new XMLHttpRequest();
+            var url = "http://localhost:8086/ShowData"
+            xhttp.open("GET", url, true);
+            xhttp.send()
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                    console.log(response);
+                    fillData(response);
+                }
+            }
+        }
+        function fillData(response){
+            console.log(response)
+            let dataFiller = document.getElementById("log")
+            var dataString = "<table style='width:80%;margin:5%;border:1px solid black;'><tr><th>name</th><th>division</th><th>attendance</th><th>percentage</th><th>classroom</th><th>roll no</th><th>Email ID</th><th>mobile no</th></tr>";
+            for(a of response){
+            dataString += "<tr> <td>" + a.name + "</td> <td>" + a.division + "</td> <td>" + a.attendance + "</td> <td>" + a.percentage + "</td> <td>" + a.classroom + "</td> <td>" + a.roll + "</td> <td>" + a.email + "</td> <td>" + a.mobile_no +"</td> </tr>";
+            }
+            dataString += "</table>";
+            console.log(dataString)
+            dataFiller.innerHTML = "";
+            dataFiller.innerHTML = dataString;
+        }
+    </script>
+    <style>
+        .button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+header h1 {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+header {
+    padding: 10px;
+    background-color: rgb(17, 124, 143);
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <h1>Show Student Data</h1>
+    </header>
+    <br>
+    <br>
+
+    <div id="log"></div>
+    <center>
+    <button class="button" onclick="showData()">Student Details</button>
+    <button class="button" onclick="window.location.href='http://localhost:8086/graph'">Graph</button>
+    <button class="button" onclick="window.location.href='http://localhost:8086/'">Home</button>
+    </center>
+</body>
+</html>

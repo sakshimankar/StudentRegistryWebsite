@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+ 
+<style>
+    *{
+    box-sizing: border-box;
+}
+nav {
+    background-color: aqua;
+    overflow: hidden;
+}
+/*.button{
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+    float: center;
+    color:gray;
+    position: relative;
+
+}
+.button:hover{
+    background-color:#30d5c8;
+    color: blue;
+}*/
+
+header h1 {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+header {
+    padding: 10px;
+    background-color: rgb(17, 124, 143);
+}
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button:hover {background-color: #3e8e41}
+  
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  #content {
+  z-index: 999;
+  position: relative;
+  }
+
+ #box { 
+  height: 100%;
+  width: 100%;
+  background-image: url("student.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  }
+
+ #box::after {
+  background: #000000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  }
+
+
+</style>
+<body>
+    <header>
+        <h1>Student Details</h1>
+    </header>
+    <div id="box">
+        <div id="content">
+    <center>
+    <br>
+    <br>
+    <button class="button" onclick="window.location.href='http://localhost:8086/add'">ADD</button>
+    <button class="button" onclick="window.location.href='http://localhost:8086/Show'">SHOW</button>
+    <button class="button" onclick="window.location.href='http://localhost:8086/delete'">DELETE</button>
+    </center>
+    </div>
+    </div>
+</body>
+</html>

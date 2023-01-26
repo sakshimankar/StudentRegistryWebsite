@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Login</title>
+        <style>
+            table,td{
+               border:solid black 1px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action='http://localhost:8080/login' method='GET'>
+            <center>
+                <h2>Login:</h2>
+                <table>  
+                    <tr>
+                        <td><label>Name:</label></td>
+                        <td><input type='text' name='userName'placeholder='Enter Name' id='userName' required></input></td>
+                     </tr> 
+                     <tr>
+                        <td><label>Email:</label></td>
+                        <td><input type='email' name='userEmail' placeholder='Enter Email' id='userEmail' required></input></td>
+                    </tr>
+                    <tr>
+                        <td><label>Phone Number:</label></td>
+                        <td><input type='tel' name='userPhone' placeholder='Enter phone number' id='userPhone' required></input></td>
+                    </tr>      
+                    <tr>
+                        <td><label>Date Of Birth:</label></td>
+                        <td><input type='date' name='userDOB'placeholder='Enter Date of Birth' id='userDOB' required></input></td>
+                    </tr>
+                   
+                    <tr>
+                        <td><label>Address:</label></td>
+                        <td><textarea name='userAdress' placeholder='Enter Address:' id='userAddress' required></textarea></td>
+                    </tr>
+                    <tr>
+                         <td colspan="2"><center><button>Submit</button></center></td>
+                    </tr>  
+                </table>
+            </center>
+        </form>
+    </body>
+</html>
